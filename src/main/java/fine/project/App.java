@@ -15,14 +15,19 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 public class App {
-	private static List<OauthServlet> oauthServlets = new ArrayList<OauthServlet>();
-	
-	public static void main(String[] args) throws Exception {
+
+	private static List<OauthServlet> getOauthServlets() {
+		List<OauthServlet> oauthServlets = new ArrayList<OauthServlet>();
 
 		oauthServlets.add(new FacebookOauth20Servlet());
 		oauthServlets.add(new DropBoxOauth20Servlet());
 		oauthServlets.add(new LinkedInOauth20Servlet());
-		
+
+		return oauthServlets;
+	}
+
+	public static void main(String[] args) throws Exception {
+
 		Server server = new Server();
 		HttpConfiguration https = new HttpConfiguration();
 		https.addCustomizer(new SecureRequestCustomizer());
@@ -36,11 +41,12 @@ public class App {
 				"http/1.1"), new HttpConnectionFactory(https));
 		sslConnector.setPort(443);
 		server.setConnectors(new Connector[] { sslConnector });
-		
-		
+
 		ServletContextHandler context = new ServletContextHandler(server, "/", ServletContextHandler.SESSIONS);
-		context.addServlet(new ServletHolder(new IndexServlet(oauthServlets)), "/");
 		
+		List<OauthServlet> oauthServlets = getOauthServlets();
+		context.addServlet(new ServletHolder(new IndexServlet(oauthServlets)), "/");
+
 		for (OauthServlet oauthServlet : oauthServlets) {
 			context.addServlet(new ServletHolder(oauthServlet), oauthServlet.getPath());
 		}
