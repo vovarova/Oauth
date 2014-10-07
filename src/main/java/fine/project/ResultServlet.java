@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,7 +26,7 @@ public class ResultServlet extends HttpServlet {
 		}
 
 		byte[] decodeBase64Data = Base64.decodeBase64(data);
-		String finalData = StringEscapeUtils.unescapeJava(new String(decodeBase64Data, "UTF-8"));
+		String finalData = new String(decodeBase64Data, "UTF-8");
 		try {
 			JSONObject jsonInfo = new JSONObject(finalData);
 			finalData = jsonInfo.toString(1).replace("\n", "<br/>");
