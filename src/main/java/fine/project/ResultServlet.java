@@ -14,26 +14,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ResultServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = -7438102992359827539L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String data = request.getParameter("data");
 		String servlet = request.getParameter("servlet");
-		if(data==null || servlet==null){
+		if (data == null || servlet == null) {
 			response.sendError(400, "There no avaliable parameters data or servlet");
 			return;
 		}
-		
+
 		byte[] decodeBase64Data = Base64.decodeBase64(data);
-		String finalData = StringEscapeUtils.unescapeJava(new String(decodeBase64Data,"UTF-8"));
-		try{
-			JSONObject jsonInfo=new JSONObject(finalData);
+		String finalData = StringEscapeUtils.unescapeJava(new String(decodeBase64Data, "UTF-8"));
+		try {
+			JSONObject jsonInfo = new JSONObject(finalData);
 			finalData = jsonInfo.toString(1).replace("\n", "<br/>");
-		}catch(JSONException e){
-			System.out.println("Unable to parse JSON "+finalData);
-		}	
+		} catch (JSONException e) {
+			System.out.println("Unable to parse JSON " + finalData);
+		}
 		response.setContentType("text/html");
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.setCharacterEncoding("UTF-8");
@@ -42,8 +42,8 @@ public class ResultServlet extends HttpServlet {
 		writer.println("<html>");
 		writer.println("<body>");
 		writer.println("<a href=\"/\">Back to main</a>");
-		writer.println("<h3>This is your information from <b>"+servlet+"</b></h3>");
-		writer.println("<div>"+finalData+"<div>");
+		writer.println("<h3>This is your information from <b>" + servlet + "</b></h3>");
+		writer.println("<div>" + finalData + "<div>");
 		writer.println("</body>");
 		writer.println("</html>");
 	}

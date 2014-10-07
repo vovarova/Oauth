@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fine.project.oauth.OauthServlet;
+
 public class IndexServlet extends HttpServlet {
 
 	private List<OauthServlet> oauthServlets = null;
@@ -34,13 +36,17 @@ public class IndexServlet extends HttpServlet {
 		writer.println("<h1>Wellcome Human Being !</h1>");
 
 		for (OauthServlet oauthServlet : oauthServlets) {
-			writer.println("<form action=\""+oauthServlet.getPath()+"\" method=\"post\">");
-			if(oauthServlet.getIconPath()==null){
-				writer.println("<input type=\"submit\" value=\""+oauthServlet.getName()+"\">");				
-			}else{				
-				writer.println("<input type=\"image\" width=\"80\" height=\"80\" src=\""+oauthServlet.getIconPath()+"\">");
+			writer.println("<form action=\"" + oauthServlet.getPath() + "\" method=\"post\">");
+			writer.println("<div style=\"width: 170px; height: 80px; display: table\">");
+
+			if (oauthServlet.getIconPath() == null) {
+				writer.println("<input type=\"submit\" value=\"" + oauthServlet.getName() + "\">");
+			} else {
+				writer.println("<input type=\"image\" style=\"float : left; margin-right:15\" width=\"80\" height=\"80\" src=\""
+						+ oauthServlet.getIconPath() + "\">");
+				writer.println("<p>"+oauthServlet.getName()+"</p>");
 			}
-			 
+			writer.println("</div>");
 			writer.println("</form>");
 		}
 		writer.println("</body>");
