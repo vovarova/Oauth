@@ -26,19 +26,19 @@ public class App {
 		List<OauthServlet> oauthServlets = new ArrayList<OauthServlet>();
 
 		Credentials facebookCredential = new Credentials("282861085239794", "069ad672c04e061778cb46833bbc84bf",
-				"https://vroman.com/facebookOauth", "https://graph.facebook.com/me/",
+				"https://vroman.asuscomm.com/facebookOauth", "https://graph.facebook.com/me/",
 				"public_profile,email,user_friends");
 		FacebookOauth20Servlet facebookOauthServlet = new FacebookOauth20Servlet("/facebookOauth",
 				"Facebook Oauth 2.0", "https://www.facebook.com/images/fb_icon_325x325.png", facebookCredential);
 
 		Credentials linkedInCredential = new Credentials("779b93nrns2gwu", "EnfHpQ1MbBilvpiv",
-				"https://vroman.com/linkedinOauth", "https://api.linkedin.com/v1/people/~/?format=json");
+				"https://vroman.asuscomm.com/linkedinOauth", "https://api.linkedin.com/v1/people/~/?format=json");
 		LinkedInOauth20Servlet linkedInOauthServlet = new LinkedInOauth20Servlet("/linkedinOauth",
-				"LinkedIn Oauth 2.0", "http://ideascollide.com/blog/wp-content/uploads/2014/03/linkedin-icon.png",
+				"LinkedIn Oauth 2.0", "http://www.gradleware.com/wp-content/uploads/2014/08/linkedin-logo-square-300x300.png",
 				linkedInCredential);
 
 		Credentials dropboxCredential = new Credentials("iptz6hzp644bddf", "ubs8fxukbxegvbw",
-				"https://vroman.com/dropboxOauth", "https://api.dropbox.com/1/account/info");
+				"https://vroman.asuscomm.com/dropboxOauth", "https://api.dropbox.com/1/account/info");
 		DropBoxOauth20Servlet dropdoxOauthServlet = new DropBoxOauth20Servlet("/dropboxOauth", "Dropbox Oauth 2.0",
 				"http://www.ministry2youth.com/wp-content/uploads/2014/04/dropbox-icon.png", dropboxCredential);
 
